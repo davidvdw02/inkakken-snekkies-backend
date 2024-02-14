@@ -8,19 +8,20 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Entity
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Table(name = "online_recipe")
-public class OnlineRecipe {
+@Table(name = "deviated_ingredient")
+public class DeviatedIngredient{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
-    private String link;
+    private String product;
 
-    private String ingredients;
+    private int amount;
 
-    private int duration;
+    private boolean addedOrSubstracted;
+
 }

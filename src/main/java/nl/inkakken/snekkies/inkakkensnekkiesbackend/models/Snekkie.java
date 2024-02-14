@@ -5,22 +5,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Getter
-@Table(name = "online_recipe")
-public class OnlineRecipe {
+@Table(name = "snekkie")
+public class Snekkie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
+    private String name;
+
     private String link;
-
-    private String ingredients;
-
-    private int duration;
 }
