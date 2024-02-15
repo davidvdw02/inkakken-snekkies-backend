@@ -1,6 +1,5 @@
 package nl.inkakken.snekkies.inkakkensnekkiesbackend.models;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,20 +16,20 @@ import java.util.UUID;
 @Table(name = "movie_night")
 public class MovieNight {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+        @Id
+        @GeneratedValue()
+        private UUID id;
 
-    private Date date;
+        private Date date;
 
-    private String location;
+        private String location;
 
-    @ManyToMany()
-    @JoinTable(name = "movie_night_attendee", joinColumns = {
-            @JoinColumn(name = "movie_night_id")
-    }, inverseJoinColumns = {
-            @JoinColumn(name = "attendee_id")
-    })
-    private List<Attendee> attendees;
+        @ManyToMany()
+        @JoinTable(name = "movie_night_attendee", joinColumns = {
+                        @JoinColumn(name = "movie_night_id")
+        }, inverseJoinColumns = {
+                        @JoinColumn(name = "attendee_id")
+        })
+        private List<Attendee> attendees;
 
 }
