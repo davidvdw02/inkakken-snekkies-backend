@@ -43,7 +43,6 @@ public class AttendeeController {
 
     @PostMapping
     public ResponseEntity<Attendee> createAttendee(@RequestBody Attendee attendee) {
-        System.out.println(attendee.getName());
         Attendee createdAttendee = attendeeService.createAttendee(attendee);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdAttendee);
     }
