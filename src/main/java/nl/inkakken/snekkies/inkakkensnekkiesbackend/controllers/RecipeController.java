@@ -22,7 +22,7 @@ public class RecipeController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllRecipes(){
+    public ResponseEntity<List<Recipe>> getAllRecipes(){
         return ResponseEntity.ok(recipeService.getAllRecipes());
     }
 

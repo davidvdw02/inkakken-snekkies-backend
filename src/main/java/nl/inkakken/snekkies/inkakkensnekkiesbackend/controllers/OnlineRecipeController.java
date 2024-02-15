@@ -21,7 +21,7 @@ public class OnlineRecipeController {
         this.onlineRecipeService = recipeService;
     }
     @GetMapping
-    public ResponseEntity<?> getAllOnlineRecipes() {
+    public ResponseEntity<List<OnlineRecipe>> getAllOnlineRecipes() {
         return ResponseEntity.ok(onlineRecipeService.getAllRecipes());
     }
 
