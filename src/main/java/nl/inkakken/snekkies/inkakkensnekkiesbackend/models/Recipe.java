@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "recipe")
@@ -19,9 +21,6 @@ public class Recipe{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-
-    @Column(name = "name")
-    private String name;
 
     private Date startTime;
 
