@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Recipe{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     private UUID id;
 
     private Date startTime;
