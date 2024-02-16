@@ -42,4 +42,10 @@ public class MovieNightController {
         movieNightService.deleteMovieNight(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> putMovieNight(@PathVariable UUID id, @RequestBody MovieNight movieNight) {
+        this.movieNightService.putMovieNight(id, movieNight);
+        return ResponseEntity.noContent().build();
+    }
 }
