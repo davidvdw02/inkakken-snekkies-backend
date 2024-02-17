@@ -1,5 +1,6 @@
 package nl.inkakken.snekkies.inkakkensnekkiesbackend.services;
 
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineRecipe;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Recipe;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.repositories.RecipeRepository;
 
@@ -21,9 +22,12 @@ public class RecipeService {
 
     private final RecipeRepository recipeRepository;
 
+    private final OnlineRecipeService onlineRecipeService;
+
     @Autowired
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, OnlineRecipeService onlineRecipeService) {
         this.recipeRepository = recipeRepository;
+        this.onlineRecipeService = onlineRecipeService;
     }
 
     public Recipe getRecipeById(UUID id) {
@@ -47,6 +51,20 @@ public class RecipeService {
     public void deleteRecipe(UUID id) {
         logger.debug("Deleting recipe with id: " + id);
         recipeRepository.deleteById(id);
+    }
+
+    public OnlineRecipe getOnlineRecipe(UUID movieNightId) {
+        logger.debug("Getting Recipe for movie night with id: " + movieNightId);
+        Optional<Recipe> optionalRecipe = recipeRepository.findByMovieNightId(movieNightId);
+        
+        if (optionalRecipe.isPresent()) {
+            Recipe recipe = optionalRecipe.get();
+            return onlineRecipeService.getOnlineRecipeById(recipe.getOnlineRecipeId());
+        }
+
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        
+
     }
 
 }

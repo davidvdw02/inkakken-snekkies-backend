@@ -1,5 +1,6 @@
 package nl.inkakken.snekkies.inkakkensnekkiesbackend.controllers;
 
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineRecipe;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Recipe;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequestMapping("/recipe")
 @RestController
@@ -43,6 +47,12 @@ public class RecipeController {
         recipeService.deleteRecipe(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/onlinerecipe/{movieNightId}")
+    public OnlineRecipe getOnlineRecipe(@PathVariable UUID movieNightId) {
+        return recipeService.getOnlineRecipe(movieNightId);
+    }
+    
 
 
 

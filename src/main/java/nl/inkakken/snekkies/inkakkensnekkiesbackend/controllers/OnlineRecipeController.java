@@ -27,17 +27,12 @@ public class OnlineRecipeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OnlineRecipe> getOnlineRecipeById(@PathVariable UUID id) {
-        return ResponseEntity.ok(onlineRecipeService.getRecipeById(id));
+        return ResponseEntity.ok(onlineRecipeService.getOnlineRecipeById(id));
     }
 
     @PostMapping
     public ResponseEntity<OnlineRecipe> addOnlineRecipe(@RequestBody OnlineRecipe recipe) {
         return ResponseEntity.ok(onlineRecipeService.addRecipe(recipe));
-    }
-
-    @PostMapping("/recipe/{id}")
-    public ResponseEntity<OnlineRecipe> addOnlineRecipeWithRecipe(@RequestBody OnlineRecipe onlineRecipe, @PathVariable UUID id) {
-        return ResponseEntity.ok(onlineRecipeService.addOnlineRecipeWithRecipe(onlineRecipe, id));
     }
     
 
