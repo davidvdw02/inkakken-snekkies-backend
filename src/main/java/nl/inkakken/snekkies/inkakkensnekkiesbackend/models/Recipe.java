@@ -43,5 +43,4 @@ public class Recipe{
     @OneToMany(mappedBy = "recipe")
     private List<RecipePicture> recipePictures;
 
-
 }

@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, UUID> {
     Optional<Recipe> findByMovieNightId(UUID movieNightId);
+    Optional<Recipe> findByOnlineRecipeId(UUID onlineRecipeId);
 }

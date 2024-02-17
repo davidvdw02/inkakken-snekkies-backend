@@ -47,6 +47,9 @@ public class RecipeService {
         logger.debug("Saving recipe");
         return recipeRepository.save(recipe);
     }
+    public Recipe putRecipe(String id, Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
 
     public void deleteRecipe(UUID id) {
         logger.debug("Deleting recipe with id: " + id);
@@ -63,8 +66,14 @@ public class RecipeService {
         }
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        
+    }
 
+    public Recipe getRecipyByOnlineRecipeId(UUID onlineRecipeId) {
+        logger.debug("Getting Recipe for online recipe with id: " + onlineRecipeId);
+        return recipeRepository.findByOnlineRecipeId(onlineRecipeId).orElseThrow(() -> {
+            logger.error("Recipe not found with online recipe id: " + onlineRecipeId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found with online recipe id: " + onlineRecipeId);
+        });
     }
 
 }
