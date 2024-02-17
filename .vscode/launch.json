@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-InkakkenSnekkiesBackendApplication<inkakken-snekkies-backend>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "nl.inkakken.snekkies.inkakkensnekkiesbackend.InkakkenSnekkiesBackendApplication",
+            "projectName": "inkakken-snekkies-backend",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

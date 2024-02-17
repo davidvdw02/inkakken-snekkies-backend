@@ -28,8 +28,6 @@ public class Recipe{
 
     private float grade;
 
-    private String pictureReference;
-
     private UUID onlineRecipeId;
 
     private UUID movieNightId;
@@ -41,6 +39,9 @@ public class Recipe{
             @JoinColumn(name = "deviated_ingredient_id")
     })
     private List<DeviatedIngredient> deviatedIngredients;
+
+    @OneToMany(mappedBy = "recipe")
+    private List<RecipePicture> recipePictures;
 
 
 }
