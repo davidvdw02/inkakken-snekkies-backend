@@ -16,7 +16,7 @@ import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Attendee;
 public class AttendeeService {
 
 
-        private final Logger logger = LoggerFactory.getLogger(OnlineRecipeService.class);
+        private final Logger logger = LoggerFactory.getLogger(AttendeeService.class);
 
      private final AttendeeRepository attendeeRepository;
 
@@ -35,6 +35,15 @@ public class AttendeeService {
         Attendee attendee = attendeeRepository.findById(id).orElseThrow(() -> {
             logger.error("Attendee not found with id: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendee not found with id: " + id);
+        });
+        return attendee;
+    }
+
+    public Attendee getAttendeeByName(String name) {
+        logger.debug("Getting attendee with name:" + name);
+        Attendee attendee = attendeeRepository.findByName(name).orElseThrow(() -> {
+            logger.error("Attendee not found with name: " + name);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendee not found with name: " + name);
         });
         return attendee;
     }
