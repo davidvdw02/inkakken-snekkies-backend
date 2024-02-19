@@ -45,8 +45,8 @@ public class RecipeController {
         Recipe newRecipe = recipeService.saveRecipe(recipe);
         return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
     }
-    @PutMapping("path/{id}")
-    public String putRecipe(@PathVariable String id, @RequestBody Recipe recipe) {
+    @PutMapping("/{id}")
+    public Recipe putRecipe(@PathVariable String id, @RequestBody Recipe recipe) {
         return recipeService.putRecipe(id, recipe);
     }
 
