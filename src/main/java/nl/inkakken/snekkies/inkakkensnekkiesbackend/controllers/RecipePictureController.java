@@ -2,10 +2,11 @@ package nl.inkakken.snekkies.inkakkensnekkiesbackend.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.dto.NewPictureDTO;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.RecipePicture;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.services.RecipePictureService;
 
@@ -19,7 +20,8 @@ public class RecipePictureController {
         this.recipePictureService = recipePictureService;
     }
     @PostMapping
-    public ResponseEntity<RecipePicture> postNewPicture(@RequestBody String picture){
-       return ResponseEntity.ok(this.recipePictureService.postNewPicture(picture));
+    public ResponseEntity<RecipePicture> postNewPicture(@RequestBody NewPictureDTO newPictureRequest){
+       return ResponseEntity.ok(this.recipePictureService.postNewPicture(newPictureRequest));
     }
+
 }
