@@ -18,10 +18,12 @@ public class DeviatedIngredient{
     @GeneratedValue()
     private UUID id;
 
-    private String product;
-
     private int amount;
 
     private boolean addedOrSubstracted;
+
+    @ManyToOne
+    private Ingredient ingredient; 
+
 
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,7 +23,13 @@ public class OnlineRecipe {
 
     private String link;
 
-    private String ingredients;
-
     private int duration;
+
+    @ManyToMany()
+    @JoinTable(name = "ingredient_online_recipe", joinColumns = {
+            @JoinColumn(name = "recipe_id")
+    }, inverseJoinColumns = {
+            @JoinColumn(name = "ingredient_id")
+    })
+    private List<Ingredient> ingredients;
 }
