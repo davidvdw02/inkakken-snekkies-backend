@@ -19,7 +19,7 @@ import java.util.UUID;
 public class Recipe{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     private UUID id;
 
     private Date startTime;
@@ -27,8 +27,6 @@ public class Recipe{
     private int duration;
 
     private float grade;
-
-    private String pictureReference;
 
     private UUID onlineRecipeId;
 
@@ -40,7 +38,9 @@ public class Recipe{
     }, inverseJoinColumns = {
             @JoinColumn(name = "deviated_ingredient_id")
     })
-    private List<DeviatedIngredient> deviatedIngredient;
+    private List<DeviatedIngredient> deviatedIngredients;
 
+    @OneToMany(mappedBy = "recipe")
+    private List<RecipePicture> recipePictures;
 
 }

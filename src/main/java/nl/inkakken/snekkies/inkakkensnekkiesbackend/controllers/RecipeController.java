@@ -1,5 +1,6 @@
 package nl.inkakken.snekkies.inkakkensnekkiesbackend.controllers;
 
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineRecipe;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Recipe;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 @RequestMapping("/recipe")
 @RestController
@@ -37,12 +45,28 @@ public class RecipeController {
         Recipe newRecipe = recipeService.saveRecipe(recipe);
         return ResponseEntity.status(HttpStatus.CREATED).body(newRecipe);
     }
+    @PutMapping("/{id}")
+    public Recipe putRecipe(@PathVariable String id, @RequestBody Recipe recipe) {
+        return recipeService.putRecipe(id, recipe);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRecipe(@PathVariable UUID id){
         recipeService.deleteRecipe(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/onlinerecipe/{movieNightId}")
+    public OnlineRecipe getOnlineRecipe(@PathVariable UUID movieNightId) {
+        return recipeService.getOnlineRecipe(movieNightId);
+    }
+    
+
+    @GetMapping("/recipe/{onlineRecipeId}")
+    public Recipe getMethodName(@PathVariable UUID onlineRecipeId) {
+        return recipeService.getRecipyByOnlineRecipeId(onlineRecipeId);
+    }
+    
 
 
 

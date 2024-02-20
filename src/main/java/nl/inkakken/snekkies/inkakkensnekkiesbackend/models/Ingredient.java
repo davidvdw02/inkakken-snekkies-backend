@@ -1,23 +1,26 @@
 package nl.inkakken.snekkies.inkakkensnekkiesbackend.models;
 
-import jakarta.persistence.*;
+import java.util.UUID;
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Getter
-@Table(name = "snekkie")
-public class Snekkie {
-
+@Table(name = "ingredient")
+public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     private UUID id;
 
     private String name;
-
-    private String link;
 }
+

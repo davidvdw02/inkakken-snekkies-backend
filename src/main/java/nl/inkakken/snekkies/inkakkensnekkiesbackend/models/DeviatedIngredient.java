@@ -15,13 +15,17 @@ import java.util.UUID;
 public class DeviatedIngredient{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     private UUID id;
-
-    private String product;
 
     private int amount;
 
     private boolean addedOrSubstracted;
+
+    private boolean accident;
+
+    @ManyToOne
+    private Ingredient ingredient; 
+
 
 }

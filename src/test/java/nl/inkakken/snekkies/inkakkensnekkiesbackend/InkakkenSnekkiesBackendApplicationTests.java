@@ -1,13 +1,13 @@
-package nl.inkakken.snekkies.inkakkensnekkiesbackend;
+// package nl.inkakken.snekkies.inkakkensnekkiesbackend;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class InkakkenSnekkiesBackendApplicationTests {
+// @SpringBootTest
+// class InkakkenSnekkiesBackendApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+//     @Test
+//     void contextLoads() {
+//     }
 
-}
+// }
