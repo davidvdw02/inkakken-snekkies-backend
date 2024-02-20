@@ -22,6 +22,8 @@ public class DeviatedIngredient{
 
     private boolean addedOrSubstracted;
 
+    private boolean accident;
+
     @ManyToOne
     private Ingredient ingredient; 
 
