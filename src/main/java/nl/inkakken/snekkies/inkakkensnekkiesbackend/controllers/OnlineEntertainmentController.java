@@ -57,4 +57,9 @@ public class OnlineEntertainmentController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/movienight/{id}")
+    public ResponseEntity<OnlineEntertainment> getOnlineEntertainmentIdByMovieNightId(@PathVariable UUID id) {
+        return ResponseEntity.ok(onlineEntertainmentService.getOnlineEntertainmentIdByMovieNightId(id));
+    }
+
 }

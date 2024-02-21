@@ -3,8 +3,11 @@ package nl.inkakken.snekkies.inkakkensnekkiesbackend.services;
 import java.util.List;
 import java.util.UUID;
 
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Entertainment;
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.MovieNight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,6 +21,9 @@ public class OnlineEntertainmentService {
       private final Logger logger = LoggerFactory.getLogger(OnlineEntertainmentService.class);
     
     private final OnlineEntertainmentRepository onlineEntertainmentRepository;
+
+    @Autowired
+    private EntertainmentService entertainmentService;
 
     public OnlineEntertainmentService(OnlineEntertainmentRepository onlineEntertainmentRepository) {
         this.onlineEntertainmentRepository = onlineEntertainmentRepository;
@@ -53,4 +59,14 @@ public class OnlineEntertainmentService {
         this.onlineEntertainmentRepository.save(existingOnlineEntertainment);
     }
 
+    public OnlineEntertainment getOnlineEntertainmentIdByMovieNightId(UUID id) {
+        Entertainment entertainment = this.entertainmentService.getEntertainmentByMovieNightId(id);
+
+
+        return this.onlineEntertainmentRepository.findById(entertainment.getOnlineEntertainmentId())
+                .orElseThrow(() -> {
+                    logger.error("Online entertainment not found with entertainment id: " + entertainment.getOnlineEntertainmentId());
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Online entertainment not found with entertainment id: " + entertainment.getOnlineEntertainmentId());
+                });
+    }
 }
