@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineEntertainment;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.repositories.OnlineEntertainmentRepository;
 
@@ -21,18 +22,27 @@ public class OnlineEntertainmentService {
       private final Logger logger = LoggerFactory.getLogger(OnlineEntertainmentService.class);
     
     private final OnlineEntertainmentRepository onlineEntertainmentRepository;
+    private final TMDBService tmdbService;
 
     @Autowired
     private EntertainmentService entertainmentService;
 
-    public OnlineEntertainmentService(OnlineEntertainmentRepository onlineEntertainmentRepository) {
+    public OnlineEntertainmentService(OnlineEntertainmentRepository onlineEntertainmentRepository, TMDBService tmdbService) {
         this.onlineEntertainmentRepository = onlineEntertainmentRepository;
+        this.tmdbService = tmdbService;
     }
 
 
    public List<OnlineEntertainment> getAllOnlineEntertainment(){
         logger.debug("Getting all online entertainment");
          return this.onlineEntertainmentRepository.findAll();
+
+    }
+    public MovieResultsPage getMovieResultsPage(String query, int page) {
+        return this.tmdbService.searchMoviesWithPage(query, page);
+    }
+    public MovieResultsPage getMovieResults(String query) {
+        return this.tmdbService.searchMovies(query);
     }
 
     public OnlineEntertainment getOnlineEntertainmentById(UUID id){

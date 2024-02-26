@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineEntertainment;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.services.OnlineEntertainmentService;
 import java.util.List;
@@ -60,6 +62,15 @@ public class OnlineEntertainmentController {
     @GetMapping("/movienight/{id}")
     public ResponseEntity<OnlineEntertainment> getOnlineEntertainmentIdByMovieNightId(@PathVariable UUID id) {
         return ResponseEntity.ok(onlineEntertainmentService.getOnlineEntertainmentIdByMovieNightId(id));
+    }
+    @GetMapping("/query/{query}")
+    public ResponseEntity<MovieResultsPage> queryTMDB(@PathVariable String query) {
+        return ResponseEntity.ok(onlineEntertainmentService.getMovieResults(query));
+    }
+
+    @GetMapping("/query/{query}/{page}")
+    public ResponseEntity<MovieResultsPage> queryTMDB(@PathVariable String query, @PathVariable int page) {
+        return ResponseEntity.ok(onlineEntertainmentService.getMovieResultsPage(query, page));
     }
 
 }
