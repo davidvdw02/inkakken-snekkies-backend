@@ -12,7 +12,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import info.movito.themoviedbapi.TvResultsPage;
+import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
+import info.movito.themoviedbapi.model.people.Person;
+import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.tv.TvSeason;
+import info.movito.themoviedbapi.model.tv.TvSeries;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineEntertainment;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.repositories.OnlineEntertainmentRepository;
 
@@ -44,6 +50,35 @@ public class OnlineEntertainmentService {
     public MovieResultsPage getMovieResults(String query) {
         return this.tmdbService.searchMovies(query);
     }
+
+    public MovieDb getMovieById(int id) {
+        return this.tmdbService.getMovieById(id);
+    }
+
+    public List<PersonCast> getMovieCastById(int id) {
+        return this.tmdbService.getMovieCastById(id);
+    }
+
+    public TvResultsPage getSeriesResultsPage(String query, int page) {
+        return this.tmdbService.SearchSeriesWithPage(query, page);
+    }
+
+    public TvResultsPage getSeriesResults(String query) {
+        return this.tmdbService.SearchSeries(query);
+    }
+
+    public TvSeries getSerieById(int id) {
+        return this.tmdbService.getSerieById(id);
+    }
+
+    public List<PersonCast> getSerieCastById(int id) {
+        return this.tmdbService.getSerieCastById(id);
+    }
+
+    public TvSeason getSeason(int serieId, int seasonNumber) {
+        return this.tmdbService.getSeason(serieId, seasonNumber);
+    }
+
 
     public OnlineEntertainment getOnlineEntertainmentById(UUID id){
         return this.onlineEntertainmentRepository.findById(id).orElseThrow(() -> {
