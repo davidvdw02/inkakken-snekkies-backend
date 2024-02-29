@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,8 +13,12 @@ import java.util.UUID;
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private int id;
 
     private String name;
+
+    public Genre(String name) {
+        this.name = name;
+    }
 }
+

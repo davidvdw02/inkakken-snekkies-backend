@@ -1,7 +1,6 @@
 package nl.inkakken.snekkies.inkakkensnekkiesbackend.controllers;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Genre;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.services.GenreService;
 
@@ -32,7 +30,7 @@ public class GenreController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Genre> getGenreById(UUID id) {
+    public ResponseEntity<Genre> getGenreById(int id) {
         return ResponseEntity.ok(genreService.getGenreById(id));
     }
 
@@ -43,13 +41,13 @@ public class GenreController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGenre(UUID id) {
+    public ResponseEntity<Void> deleteGenre(int id) {
         genreService.deleteGenre(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> putGenre(UUID id, Genre genre) {
+    public ResponseEntity<Void> putGenre(int id, Genre genre) {
         this.genreService.putGenre(id, genre);
         return ResponseEntity.noContent().build();
     }

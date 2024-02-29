@@ -27,24 +27,28 @@ public class GenreService {
         logger.debug("Getting all genres");
         return this.genreRepository.findAll();
     }
-    public Genre getGenreById(UUID id){
+    public Genre getGenreById(int id){
         return this.genreRepository.findById(id).orElseThrow(() -> {
             logger.error("Genre not found with id: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Genre not found with id: " + id);
         });
     }
 
+    public Genre getGenreByIdWithoutException(int id){
+        return this.genreRepository.findById(id).orElse(null);
+    }
+    
     public Genre createGenre(Genre genre){
         logger.debug("Creating genre");
         return this.genreRepository.save(genre);
     }
 
-    public void deleteGenre(UUID id){
+    public void deleteGenre(int id){
         logger.debug("Deleting genre with id: " + id);
         this.genreRepository.deleteById(id);
     }
     
-    public void putGenre(UUID id, Genre genre){
+    public void putGenre(int id, Genre genre){
         logger.debug("getting genre with id: " + id);
         Genre existingGenre = this.getGenreById(id);
         logger.debug("updating genre with id: " + id);

@@ -17,12 +17,10 @@ import java.util.UUID;
 public class Entertainment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue()
     private UUID id;
 
     private float rating;
-
-    private int duration;
 
     private EntertainmentType type;
 

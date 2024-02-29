@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,11 +21,16 @@ public class EntertainmentService {
     private EntertainmentRepository entertainmentRepository;
 
 
-    public Entertainment getEntertainmentByMovieNightId(UUID id) {
+    public List<Entertainment> getEntertainmentByMovieNightId(UUID id) {
         return this.entertainmentRepository.findByMovieNightId(id).orElseThrow( () -> {
             logger.error("Entertainment not found with movie night id: " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entertainment not found with movie night id: " + id);
         });
+    }
+
+    public Entertainment createEntertainment(Entertainment entertainment) {
+        logger.debug("Creating entertainment");
+        return this.entertainmentRepository.save(entertainment);
     }
 
 }

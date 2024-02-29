@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Entertainment;
+import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.Genre;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.MovieNight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import info.movito.themoviedbapi.model.people.Person;
 import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.tv.TvEpisode;
 import info.movito.themoviedbapi.model.tv.TvSeason;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import nl.inkakken.snekkies.inkakkensnekkiesbackend.models.OnlineEntertainment;
@@ -29,12 +31,11 @@ public class OnlineEntertainmentService {
     
     private final OnlineEntertainmentRepository onlineEntertainmentRepository;
     private final TMDBService tmdbService;
+    private final GenreService genreService;
 
-    @Autowired
-    private EntertainmentService entertainmentService;
-
-    public OnlineEntertainmentService(OnlineEntertainmentRepository onlineEntertainmentRepository, TMDBService tmdbService) {
+    public OnlineEntertainmentService(OnlineEntertainmentRepository onlineEntertainmentRepository, TMDBService tmdbService, GenreService genreService) {
         this.onlineEntertainmentRepository = onlineEntertainmentRepository;
+        this.genreService = genreService;
         this.tmdbService = tmdbService;
     }
 
@@ -51,7 +52,7 @@ public class OnlineEntertainmentService {
         return this.tmdbService.searchMovies(query);
     }
 
-    public MovieDb getMovieById(int id) {
+    public OnlineEntertainment getMovieById(int id) {
         return this.tmdbService.getMovieById(id);
     }
 
@@ -79,6 +80,9 @@ public class OnlineEntertainmentService {
         return this.tmdbService.getSeason(serieId, seasonNumber);
     }
 
+   public OnlineEntertainment getFormattedTvShow(int serieId, int seasonnumber, int episodeNumber){
+        return this.tmdbService.getFormattedTvShow(serieId, seasonnumber, episodeNumber);
+    }
 
     public OnlineEntertainment getOnlineEntertainmentById(UUID id){
         return this.onlineEntertainmentRepository.findById(id).orElseThrow(() -> {
@@ -88,6 +92,13 @@ public class OnlineEntertainmentService {
     }
 
     public OnlineEntertainment createOnlineEntertainment(OnlineEntertainment onlineEntertainment){
+       
+        for(Genre genre : onlineEntertainment.getGenres()){
+            if(this.genreService.getGenreByIdWithoutException(genre.getId()) == null){
+                logger.debug("Creating genre");
+                genre = this.genreService.createGenre(genre);
+            }
+        }
         logger.debug("Creating online entertainment");
         return this.onlineEntertainmentRepository.save(onlineEntertainment);
     }
@@ -102,16 +113,5 @@ public class OnlineEntertainmentService {
        OnlineEntertainment existingOnlineEntertainment = this.getOnlineEntertainmentById(id);
        logger.debug("updating online entertainment with id: " + id);
         this.onlineEntertainmentRepository.save(existingOnlineEntertainment);
-    }
-
-    public OnlineEntertainment getOnlineEntertainmentIdByMovieNightId(UUID id) {
-        Entertainment entertainment = this.entertainmentService.getEntertainmentByMovieNightId(id);
-
-
-        return this.onlineEntertainmentRepository.findById(entertainment.getOnlineEntertainmentId())
-                .orElseThrow(() -> {
-                    logger.error("Online entertainment not found with entertainment id: " + entertainment.getOnlineEntertainmentId());
-                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Online entertainment not found with entertainment id: " + entertainment.getOnlineEntertainmentId());
-                });
     }
 }
