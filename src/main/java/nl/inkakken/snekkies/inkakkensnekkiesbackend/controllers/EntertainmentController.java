@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class EntertainmentController {
     }
 
 
-    @GetMapping("/{movieNightId}")
+    @GetMapping("/movienight/{movieNightId}")
     public ResponseEntity<List<Entertainment>> getEntertainmentByMovieNightId(@PathVariable UUID movieNightId) {
         return ResponseEntity.ok(entertainmentService.getEntertainmentByMovieNightId(movieNightId));
     }
@@ -34,4 +35,14 @@ public class EntertainmentController {
     public ResponseEntity<Entertainment> createEntertainment( @RequestBody Entertainment entertainment) {
         return ResponseEntity.ok(entertainmentService.createEntertainment(entertainment));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Entertainment> getEntertainmentById(@PathVariable UUID id) {
+        return ResponseEntity.ok(entertainmentService.getEntertainmentById(id));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Entertainment> updateEntertainment(@PathVariable UUID id, @RequestBody Entertainment entertainment) {
+        return ResponseEntity.ok(entertainmentService.updateEntertainment(id, entertainment));
+    }
+
 }

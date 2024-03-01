@@ -65,7 +65,7 @@ public class TMDBService {
     }
 
     public List<PersonCast> getSerieCastById(int id) {
-        return new TmdbApi(apiKey).getTvSeries().getSeries(id, "en").getCredits().getCast();
+        return new TmdbApi(apiKey).getTvSeries().getCredits(id, "en-US").getCast();
     }
 
     public TvSeason getSeason(int serieId, int seasonNumber) {
@@ -83,7 +83,7 @@ public class TMDBService {
     public OnlineEntertainment getFormattedTvShow(int serieId, int seasonnumber, int episodeNumber){
         TvEpisode episode = getEpisode(serieId, seasonnumber, episodeNumber);
         TvSeries serie = getSerieById(serieId);
-        return new OnlineEntertainment(episode.getId(), serie.getName(), episode.getVoteAverage(), formatStringToDate(episode.getAirDate()), serie.getPosterPath(), seasonnumber, episodeNumber, episode.getName(), episode.getStillPath(), refactorGenres(serie.getGenres()));
+        return new OnlineEntertainment(serieId,episode.getId(), serie.getName(), episode.getVoteAverage(), formatStringToDate(episode.getAirDate()), serie.getPosterPath(), seasonnumber, episodeNumber, episode.getName(), episode.getStillPath(), refactorGenres(serie.getGenres()));
     }
 
     private OnlineEntertainment refactorMovieToOnlineENtertainment(MovieDb movie) {

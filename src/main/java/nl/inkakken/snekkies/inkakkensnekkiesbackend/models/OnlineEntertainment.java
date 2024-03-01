@@ -28,6 +28,9 @@ public class OnlineEntertainment {
 
     private int tmdbId;
 
+    @Nullable
+    private int tmdbEpisodeId;
+
     private String title;
 
     private float rating;
@@ -59,7 +62,7 @@ public class OnlineEntertainment {
     })
     private List<Genre> genres;
 
-    public OnlineEntertainment(int tmdbId, String title, float rating, Date releaseDate, String posterPath, Integer season, Integer episode,String episodeTitle , String stillImagePath, List<Genre> genres) {
+    public OnlineEntertainment(int tmdbId, int tmdbEpisodeId, String title, float rating, Date releaseDate, String posterPath, Integer season, Integer episode,String episodeTitle , String stillImagePath, List<Genre> genres) {
         this.tmdbId = tmdbId;
         this.title = title;
         this.rating = rating;
@@ -69,6 +72,7 @@ public class OnlineEntertainment {
         this.episode = episode;
         this.stillImagePath = stillImagePath;
         this.genres = genres;
+        this.tmdbEpisodeId = tmdbEpisodeId;
         this.episodeTitle = episodeTitle;
     }
 

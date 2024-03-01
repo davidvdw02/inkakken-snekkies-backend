@@ -33,4 +33,20 @@ public class EntertainmentService {
         return this.entertainmentRepository.save(entertainment);
     }
 
+    public Entertainment getEntertainmentById(UUID id) {
+        return this.entertainmentRepository.findById(id).orElseThrow( () -> {
+            logger.error("Entertainment not found with id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entertainment not found with id: " + id);
+        });
+    }
+
+    public Entertainment updateEntertainment(UUID id, Entertainment entertainment) {
+        this.entertainmentRepository.findById(id).orElseThrow( () -> {
+            logger.error("Entertainment not found with id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Entertainment not found with id: " + id);
+        });
+        logger.debug("Updating entertainment with id: " + id);
+        return this.entertainmentRepository.save(entertainment);
+    }
+
 }
