@@ -33,6 +33,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+        <dependency>
+    <groupId>uk.co.conoregan</groupId>
+    <artifactId>themoviedbapi</artifactId>
+    <version>1.15.1</version>
+</dependency>
 
 
         <dependency>
